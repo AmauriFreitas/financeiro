@@ -1,4 +1,4 @@
-def calcula_inss(salario):
+def calcular_inss(salario):
 	if salario <= 1000.0:
 		return 0.0
 	if salario <= 2000.0:
@@ -17,18 +17,30 @@ def calcular_ir(salario_liq):
 	else:
 		return salario_liq * 0.27
 		
-def calcular_sal_liq(salario, num_dep):
+def calcular_salario_liquido(salario, dep):
+	desc_inss = calcular_inss(salario)
+	salario_ir = salario - desc_inss - 100.0 * dep
+	desc_ir = calcular_ir(salario_ir)
+	return salario - desc_inss - desc_ir
 	
-	desconto_dependente = num_dep * 100
-	salario_base_ir = salario - calcula_inss(salario) - desconto_dependente
-	salario_liq = salario_base_ir - calcular_ir(salario_base_ir)
+salario = float(input('salario bruto: '))
+dep = int(input('dependentes: '))
+liquido = calcular_salario_liquido(salario,dep)
+print('salario liquido: ', liquido)
 
-	return salario_liq 
 
-salario_bruto = 3000.0
-num_dependentes = 2
 
-print("salario bruto de:", salario_bruto) 
-print("salario liquido de: ", calcular_sal_liq(salario_bruto, num_dependentes))
+	
+#	desconto_dependente = dep * 100
+#	salario_base_ir = salario - calcula_inss(salario) - desconto_dependente
+#	salario_liq = salario_base_ir - calcular_ir(salario_base_ir)
+
+#	return salario_liq 
+
+#salario_bruto = 3000.0
+#num_dependentes = 2
+
+#print("salario bruto de:", salario_bruto) 
+#print("salario liquido de: ", calcular_salario_liquido(salario_bruto, num_dependentes))
 
 
