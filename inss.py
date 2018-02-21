@@ -17,6 +17,18 @@ def calcular_ir(salario_liq):
 	else:
 		return salario_liq * 0.27
 		
-def calcular_sal_liq():
+def calcular_sal_liq(salario, num_dep):
+	
+	desconto_dependente = num_dep * 100
+	salario_base_ir = salario - calcula_inss(salario) - desconto_dependente
+	salario_liq = salario_base_ir - calcular_ir(salario_base_ir)
+
+	return salario_liq 
+
+salario_bruto = 3000.0
+num_dependentes = 2
+
+print("salario bruto de:", salario_bruto) 
+print("salario liquido de: ", calcular_sal_liq(salario_bruto, num_dependentes))
 
 
